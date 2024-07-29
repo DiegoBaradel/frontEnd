@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+
+:root{
+    --font-neon: "Tilt Neon", sans-serif;
+    --bg-color: #26355D;
+    --primary-color: #AF47D2;
+}
+
+body{
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: var(--font-neon);
+    margin: 0;
+}
+
+h1{
+    font-size: 5em;
+}
+h2{
+    font-size: 4em;
+}
+h3{
+    font-size: 2em;
+    margin-top: 20px;
+}
+.mensagem{
+    margin-top: 40px;
+    font-size: 1.5em;
+}
+.box{
+    font-size: 4em;
+    border: 2px solid var(--primary-color);
+    display: inline-block;
+    padding: 10px;
+    margin: 20px;
+}
+#btn-start{
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    color: var(--primary-color);
+    margin-top: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+#btn-start:hover{
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    transition: 0.2s;
+}

@@ -1,0 +1,118 @@
+.cabecalho{
+    background-color: var(--cor-branco);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    position: relative;
+}
+.cabecalho__divisoria{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.cabecalho__label{
+    padding: .5rem;
+}
+.cabecalho__divisoria__menu{
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background-image: url("../assets/Menu.svg");
+    display: inline-block;
+}
+.lista-menu{
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 0;
+    width: 60vw;
+}
+#menu{
+    display: none;
+}
+#menu:checked~.lista-menu{
+    display: block;
+}
+.lista-menu__titulo,
+.lista-menu__itens{
+    padding: 1rem;
+    background-color: var(--cor-branco);
+}
+.lista-menu__titulo{
+    color: var(--laranja);
+    font-size: 1.125rem;
+}
+.lista-menu__link{
+    background: var(--gradiente);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+}
+.cabecalho__menu-tablet__lista__item:hover,
+.cabecalho__menu-tablet__lista__item:hover>a,
+#menu-tablet:checked~.menu-tablet>.cabecalho__menu-tablet__lista__item,
+.lista-menu__itens:hover,
+.lista-menu__itens:hover>a{
+    background: var(--gradiente);
+    -webkit-text-fill-color: var(--cor-branco);
+}
+#menu:checked~.cabecalho__label>.cabecalho__divisoria__menu{
+    background-image: url("../assets/MenuAberto.svg");
+}
+#menu:checked~.cabecalho__label{
+    background: var(--gradiente);
+}
+
+@media screen and (min-width: 1024px) {
+    
+    .cabecalho__menu-tablet{
+        position: relative;
+    }
+    .cabecalho__divisoria__titulo{
+        font-family: var(--Josefin);
+        font-size: 30px;
+        font-weight: 400;
+    }
+    .cabecalho__divisoria__titulo strong{
+        font-weight: 700;
+    }
+    .cabecalho__divisoria__menu{
+        display: none;
+    }
+    .cabecalho__menu-tablet__lista{
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+    .cabecalho__menu-tablet__lista__item{
+        padding: 1rem;
+    }
+    .cabecalho__menu-tablet__lista__item a{
+        color: var(--preto);
+    }
+    #menu-tablet{
+        display: none;
+    }
+    #menu-tablet:checked ~ .lista-menu{
+        display: block;
+        width: auto;
+    }
+}
+
+@media screen and (min-width: 1728px) {
+    .no-descktop{
+        display: none;
+    }
+    .cabecalho__menu-tablet{
+        margin-right: auto;
+    }
+    .cabecalho__divisoria__link{
+        display: flex;
+        align-items: center;
+        gap: .1rem;
+        color: var(--preto);
+    }
+}

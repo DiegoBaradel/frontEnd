@@ -1,0 +1,47 @@
+@import url("./style/banner.css");
+@import url("./style/header.css");
+@import url("./style/carrosel.css");
+@import url("./style/card.css");
+@import url("./style/topico.css");
+@import url("./style/contato.css");
+@import url("./style/rodape.css");
+
+:root{
+    --cor-de-fundo:#EBECEE;
+    --cor-branco:#FFFFFF;
+    --laranja: #EB9800;
+    --azul: #002F52;
+    --preto: #000;
+    --gradiente: linear-gradient(97.54deg, #002F52 35.49%, #326589 165.37%);
+
+    --poppins: "Poppins", sans-serif;
+    --Josefin: "Josefin Sans", sans-serif;
+}
+hr{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: var(--cor-de-fundo);
+    font-family: var(--poppins);
+    font-size: 1rem;
+    font-weight: 400;
+}
+.tablet{
+    display: none;
+}
+.desktop{
+    display: none;
+}
+
+@media screen and (min-width: 1024px) {
+    .tablet{
+        display: block;
+    }
+}
+
+@media screen and (min-width: 1728px) {
+    .desktop{
+        display: block;
+    }
+}

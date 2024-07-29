@@ -1,0 +1,76 @@
+.card__conteudo{grid-area: conteudo;}
+.card__imagem-angular{grid-area: imagem;}
+.card__lista-links{grid-area: lista;}
+.card__botao{grid-area: botao;}
+
+.card{
+    display: grid;
+    grid-template-areas: 
+        'conteudo imagem'
+        'conteudo imagem'
+        'lista botao';
+    gap: 1rem;
+    
+    background-color: var(--cor-branco);
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.card__conteudo_estrela{
+    margin-bottom: 1rem;
+}
+.card__conteudo__titulo{
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--laranja);
+    margin-bottom: .5rem;
+}
+.card__conteudo__titulo-angular{
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--azul);
+    margin-bottom: .5rem;
+}
+.card__conteudo__texto{
+    font-size: .875rem;
+    font-weight: 400;
+}
+.card__imagem-angular img{
+    width: 100%;
+}
+.card__lista-links__ul{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.card__botao{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card__botao__link{
+    padding: 8px 16px;
+    background-color: var(--laranja);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--cor-branco);
+}
+
+@media screen and (min-width:1024px){
+
+    .card{
+        width: 50%;
+        margin: 2rem auto;
+    }
+}
+
+@media screen and (min-width:1728px){
+
+    .card{
+        width: 40%;
+        margin: 5rem auto 2rem auto;
+    }
+}

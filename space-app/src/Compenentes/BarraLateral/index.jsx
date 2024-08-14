@@ -7,13 +7,9 @@ const ListaEstilo = styled.ul`
     padding: 0;
     width: 212px;
 `
-const AsideEstilo = styled.aside`
-position: absolute;
-left: 0px;
-`
 const BarraLateral = ()=>{
     return(
-        <AsideEstilo>
+        <aside>
             <nav>
                 <ListaEstilo>
                     <ItemNavegacao
@@ -49,7 +45,7 @@ const BarraLateral = ()=>{
                     </ItemNavegacao>
                 </ListaEstilo>
             </nav>
-        </AsideEstilo>
+        </aside>
     )
 }
 

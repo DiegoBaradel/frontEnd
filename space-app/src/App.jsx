@@ -20,9 +20,9 @@ const MainConteiner = styled.div`
   gap: 24px;
 `
 const GaleriaConteiner = styled.section`
-  max-width: 100%;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 `
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
               texto='A galeria mais completa de fotos do espaço!'
               backgroundImage='./imagens/banner.png'
             />
-            <Galeria />
+            <Galeria/>
           </GaleriaConteiner>
         </MainConteiner>
       </ConteinerApp>

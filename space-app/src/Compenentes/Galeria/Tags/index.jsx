@@ -29,11 +29,19 @@ const Texto = styled.p`
     line-height: 29px;
     text-align: center;
 `
-const Tags = () =>{
-    return(
+const Tags = ({setTags}) => {
+    return (
         <Conteiner>
-        <Texto>Busque por tags:</Texto>
-        {tags.map(tag=> <BotaoEstilo key={tag.id}><Texto>{tag.titulo}</Texto></BotaoEstilo>)}
+            <Texto>Busque por tags:</Texto>
+            {tags.map(tag =>
+                <BotaoEstilo
+                    onClick={()=>setTags(tag.titulo)}
+                    key={tag.id}
+                >
+                    <Texto>
+                        {tag.titulo}
+                    </Texto>
+                </BotaoEstilo>)}
         </Conteiner>
     )
 }

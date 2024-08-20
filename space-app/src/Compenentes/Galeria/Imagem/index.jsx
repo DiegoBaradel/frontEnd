@@ -50,7 +50,10 @@ const StyledButton = styled.button`
 `
 
 
-const Imagem = ({foto, expandir=false, aoZoomSolicitado})=>{
+const Imagem = ({foto, expandir=false, aoZoomSolicitado, aoAlternarFavorito})=>{
+
+    const iconeAtivo = foto.favorita ? '/icones/favorito-ativo.png':'/icones/favorito.png'
+
     return(
         <Figure $expandir = {expandir}>
             <img src={foto.path} alt=""/> 
@@ -59,7 +62,7 @@ const Imagem = ({foto, expandir=false, aoZoomSolicitado})=>{
                 <Footer>
                     <p>{foto.fonte}</p>
                     <div>
-                        <StyledButton $url='/icones/favorito.png'></StyledButton>
+                        <StyledButton onClick={()=> aoAlternarFavorito(foto)} $url={iconeAtivo}></StyledButton>
                         {!expandir && <StyledButton onClick={() => aoZoomSolicitado(foto)} $url='/icones/expandir.png'></StyledButton>}
                     </div>
                 </Footer>

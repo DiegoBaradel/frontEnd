@@ -37,14 +37,14 @@ const ButtonStyled = styled.button`
 `
 
 
-const ModalZoom = ({ foto, aoFechar}) => {
+const ModalZoom = ({ foto, aoFechar, aoAlternarFavorito}) => {
     return (
         <>
             { foto &&
             <>
                 <Overlay />
                 <Dialog open={!!foto} >
-                    <Imagem foto={foto} expandir={true} />
+                    <Imagem foto={foto} expandir={true} aoAlternarFavorito={aoAlternarFavorito} />
                     <form method="dialog">
                         <ButtonStyled onClick={aoFechar}><span><IoMdClose size={24} /></span></ButtonStyled>
                     </form>

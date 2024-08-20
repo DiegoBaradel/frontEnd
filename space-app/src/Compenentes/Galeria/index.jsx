@@ -17,10 +17,12 @@ const ImagemGaleriaConteiner = styled.div`
 const SecaoFluida = styled.section`
     flex-grow: 1;
 `
-const Galeria = ({aoFotoSelecionada ,fotos =[]})=>{
+const Galeria = ({setTags, aoFotoSelecionada, aoAlternarFavorito, fotos =[]})=>{
     return(
         <>
-            <Tags></Tags>
+            <Tags
+             setTags={setTags}
+            />
             <GaleriaConteiner>
                 <SecaoFluida>
                     <Titulo>Navegue pela galeria</Titulo>
@@ -30,6 +32,7 @@ const Galeria = ({aoFotoSelecionada ,fotos =[]})=>{
                                 key={foto.id} 
                                 foto = {foto}
                                 expandir = {false}
+                                aoAlternarFavorito={aoAlternarFavorito}
                             />)}
                         </ImagemGaleriaConteiner>
                 </SecaoFluida>

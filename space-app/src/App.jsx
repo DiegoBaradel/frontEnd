@@ -5,8 +5,9 @@ import BarraLateral from "./Compenentes/BarraLateral"
 import Banner from "./Compenentes/Banner"
 import Galeria from "./Compenentes/Galeria"
 import fotos from './fotos.json'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ModalZoom from "./Compenentes/ModalZoom"
+import Footer from "./Compenentes/Footer"
 
 const FundoGradiente = styled.div`
 background: linear-gradient(174.61deg, #041833 4.16%, #04244F 48%, #154580 96.76%);
@@ -31,17 +32,42 @@ const GaleriaConteiner = styled.section`
 const App=()=> {
   const [fotosDaGaleria, setFotosDaGaleria] = useState(fotos)
   const [fotoSelecionada, setFotoSelecionada] = useState(null)
+  const [busca, setBusca] = useState('')
+  const [tags, setTags] = useState('Todos')
+
+  useEffect(()=>{
+    console.log('testando o useEffects')
+  },[tags, busca])
 
   const aoFechar=(evt)=>{
     evt.preventDefault()
     setFotoSelecionada(!fotoSelecionada)
   }
   
+  const aoAlternarFavorito = (foto)=>{
+    if (foto.id === fotoSelecionada?.id) {
+      setFotoSelecionada({
+        ...fotoSelecionada, 
+        favorita: !fotoSelecionada.favorita
+      })
+    }
+
+    setFotosDaGaleria(fotosDaGaleria.map(fotoFavorita=>{
+      return{
+        ...fotoFavorita,
+        favorita: fotoFavorita.id === foto.id ? !foto.favorita : fotoFavorita.favorita
+      }
+    }))
+  }
+
   return (
     <FundoGradiente>
       <ConteinerApp>
         <EstiloGlobal />
-        <Cabacalho />
+        <Cabacalho
+          busca={busca}
+          setBusca={setBusca}
+        />
         <MainConteiner>
           <BarraLateral />
           <GaleriaConteiner>
@@ -50,15 +76,19 @@ const App=()=> {
               backgroundImage='./imagens/banner.png'
             />
             <Galeria
-              aoFotoSelecionada={foto => setFotoSelecionada(foto)} 
+              setTags={setTags}
+              aoFotoSelecionada={foto => setFotoSelecionada(foto)}
+              aoAlternarFavorito={aoAlternarFavorito}
               fotos={fotosDaGaleria}
             />
           </GaleriaConteiner>
         </MainConteiner>
       </ConteinerApp>
+        <Footer/>
       <ModalZoom 
         foto = {fotoSelecionada}
         aoFechar={aoFechar}
+        aoAlternarFavorito={aoAlternarFavorito}
       />
     </FundoGradiente>
   )

@@ -10,11 +10,14 @@ const HeaderEstilo = styled.header`
     }
 `
 
-const Cabacalho = ()=>{
+const Cabacalho = ({busca, setBusca})=>{
     return(
         <HeaderEstilo>
             <img src="./imagens/logo.png" alt="logo do space app"/>
-            <CampoTexto/>
+            <CampoTexto
+                busca={busca}
+                setBusca={setBusca}
+            />
         </HeaderEstilo>
     )
 }

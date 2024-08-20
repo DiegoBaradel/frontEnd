@@ -35,7 +35,7 @@ const Tags = ({setTags}) => {
             <Texto>Busque por tags:</Texto>
             {tags.map(tag =>
                 <BotaoEstilo
-                    onClick={()=>setTags(tag.titulo)}
+                    onClick={()=>setTags(tag.id)}
                     key={tag.id}
                 >
                     <Texto>

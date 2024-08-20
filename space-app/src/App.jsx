@@ -33,11 +33,21 @@ const App=()=> {
   const [fotosDaGaleria, setFotosDaGaleria] = useState(fotos)
   const [fotoSelecionada, setFotoSelecionada] = useState(null)
   const [busca, setBusca] = useState('')
-  const [tags, setTags] = useState('Todos')
+  const [tags, setTags] = useState(0)
 
   useEffect(()=>{
-    console.log('testando o useEffects')
-  },[tags, busca])
+    setTags(0)
+    setFotosDaGaleria(fotos.filter(foto=>{
+      return busca===''? foto : foto.titulo.toLowerCase().includes(busca.toLowerCase())
+    }))
+  },[busca])
+
+  useEffect(()=>{
+    setBusca('')
+    setFotosDaGaleria(fotos.filter(foto=>{
+      return tags === 0 ? foto : foto.tagId === tags
+    }))
+  },[tags])
 
   const aoFechar=(evt)=>{
     evt.preventDefault()

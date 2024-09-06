@@ -1,5 +1,4 @@
 import Card from '../card'
-import Cards from '../../json/db.json'
 import styled from 'styled-components'
 
 const StyledUl = styled.ul`
@@ -11,10 +10,10 @@ const StyledUl = styled.ul`
 `
 
 
-const ListaCard = ()=>{
+const Lista = ({type})=>{
     return(
         <StyledUl>
-            {Cards.map(item=>
+            {type.map(item=>
                 <li key={item.id}>
                     <Card 
                         id={item.id}
@@ -27,4 +26,4 @@ const ListaCard = ()=>{
     )
 }
 
-export default ListaCard
+export default Lista

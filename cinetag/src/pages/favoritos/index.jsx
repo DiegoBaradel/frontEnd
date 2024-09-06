@@ -1,8 +1,10 @@
 import Banner from "../../components/banner"
-import ListaCard from "../../components/listaCards"
+import Lista from "../../components/lista"
 import Titulo from "../../components/titulo"
+import { useFavotiroContexto } from "../../contextos/favoritoContexto/Favoritos"
 
 const Favoritos = ()=>{
+    const {favorito} = useFavotiroContexto()
     return(
         <>
             <Banner url='Favoritos' />
@@ -10,7 +12,9 @@ const Favoritos = ()=>{
                 <h1>Meus Favoritos</h1>
             </Titulo>
             <section>
-                <ListaCard />
+                <Lista
+                    type={favorito?favorito:[]}
+                />
             </section>
         </>
     )

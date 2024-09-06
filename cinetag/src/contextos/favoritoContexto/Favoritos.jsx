@@ -19,7 +19,7 @@ export const useFavotiroContexto = ()=>{
     const {favorito, setFavorito} = useContext(FavoritoContexto)
 
     const adicionarFavorito = (novoFavorito)=>{
-        const favoritoRepetido = favorito.some(item => item,id === novoFavorito.is)
+        const favoritoRepetido = favorito.some(item => item.id === novoFavorito.id)
 
         let novaLista = [...favorito]
 

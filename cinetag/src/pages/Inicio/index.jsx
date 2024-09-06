@@ -1,7 +1,7 @@
 import Banner from "../../components/banner"
-import ListaCard from "../../components/listaCards"
+import Lista from "../../components/lista"
 import Titulo from "../../components/titulo"
-
+import Cards from '../../json/db.json'
 
 const Inicio = () =>{
     return(
@@ -11,7 +11,9 @@ const Inicio = () =>{
                 <h1>Um lugar para guardar seus vídeos e filmes!</h1>
             </Titulo>
             <section>
-                <ListaCard />
+                <Lista
+                    type={Cards}
+                />
             </section>
         </>
     )

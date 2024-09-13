@@ -1,0 +1,45 @@
+.secao{
+    display: grid;
+    align-items: end;
+    row-gap: 2rem;
+}
+.secao-horizontal, .secao-vertical{
+    grid-template-rows: 70px auto;
+}
+
+.secao-vertical{
+    display: grid;
+    grid-template-areas: 
+        "h2 a"
+        "ul ul";
+    grid-template-columns: 1fr auto;
+}
+.secao-vertical h2{
+    grid-area: h2;
+}
+.secao-vertical a{
+    grid-area: a;
+}
+.secao-vertical .secao__cartoes{
+    grid-area: ul;
+    display:  grid;
+    grid-auto-flow: column;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    column-gap: 1.25rem;
+}
+
+.secao-horizontal .secao__cartoes{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(80%/2, max(350px, 80%/3)),1fr));
+    gap: 1.25rem;
+}
+
+.secao-vertical .secao__cartoes .cartao a{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.secao-vertical .cartao__titulo{
+    flex-grow: 1;
+}

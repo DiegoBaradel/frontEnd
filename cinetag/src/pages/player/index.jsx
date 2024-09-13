@@ -1,17 +1,41 @@
 import { useParams } from 'react-router-dom'
 import Banner from '../../components/banner'
 import Titulo from "../../components/titulo"
-import Videos from '../../json/db.json'
 import styled from 'styled-components'
 import PaginaNaoEncontrada from '../paginaNaoEncontrada'
+import { useEffect, useState } from 'react'
 
-const StyledIframe = styled.iframe`
-    height: 80vh;
+const StyledSection= styled.section`
+    display: flex;
+    align-items: center;
+`
+
+const StyledDiv = styled.div `
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 56.25%;
+`
+const StyledIframe= styled.iframe`
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
 `
 
 const Player = ()=>{
     const parametros = useParams()
-    const video = Videos.find(item => item.id === Number(parametros.id))
+    const [video, setVideo] = useState()
+
+    useEffect(()=>{
+        fetch(`https://my-json-server.typicode.com/DiegoBaradel/api-cinetag/videos?id=${parametros.id}`)
+        .then(res => res.json())
+        .then(dados=> setVideo(...dados))
+    },[])
 
     if (!video) {
         return <PaginaNaoEncontrada />
@@ -22,18 +46,15 @@ const Player = ()=>{
         <Titulo>
             <h1>Player</h1>
         </Titulo>
-        <section>
-            <StyledIframe 
-                width="100%" 
-                height="100%" 
+        <StyledSection>
+            <StyledDiv>
+            <StyledIframe
                 src={video.link} 
                 title={video.titulo} 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" 
-                allowfullscreen>    
+                >    
             </StyledIframe>
-        </section>
+            </StyledDiv>
+        </StyledSection>
         </>
     )
 }

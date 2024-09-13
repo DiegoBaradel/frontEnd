@@ -1,9 +1,17 @@
+import { useEffect, useState } from "react"
 import Banner from "../../components/banner"
 import Lista from "../../components/lista"
 import Titulo from "../../components/titulo"
-import Cards from '../../json/db.json'
 
 const Inicio = () =>{
+
+    const [videos, setVideos] = useState([])
+
+    useEffect(()=>{
+        fetch('https://my-json-server.typicode.com/DiegoBaradel/api-cinetag/videos')
+        .then(res=> res.json())
+        .then(dados=>setVideos(dados))
+    },[])
     return(
         <>
             <Banner url='Home' />
@@ -12,7 +20,7 @@ const Inicio = () =>{
             </Titulo>
             <section>
                 <Lista
-                    type={Cards}
+                    type={videos}
                 />
             </section>
         </>

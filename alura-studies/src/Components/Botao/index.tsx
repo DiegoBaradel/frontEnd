@@ -1,9 +1,20 @@
-import "./styles.scss"
+import style from './botao.module.scss'
 
-const Botao =()=>{
+interface BotaoProps{
+    texto?: string
+    children?: React.ReactNode,
+    type?: 'submit'|'button'|'reset',
+    onClick?: () => void
+}
+
+const Botao =({children, type='button', onClick}: BotaoProps)=>{
     return(
-        <button className="botao">
-            Submit
+        <button
+            onClick={onClick}
+            className={style.botao}
+            type={type}
+        >    
+        {children}
         </button>
     )
 }

@@ -4,6 +4,7 @@ import Menu from 'components/Menu';
 import Cardapio from 'pages/Cardapio';
 import Inicio from 'pages/Inicio';
 import NotFound from 'pages/NotFound';
+import Prato from 'pages/Prato';
 import Sobre from 'pages/Sobre';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -18,6 +19,7 @@ export default function AppRoutes() {
             <Route path='Cardapio' element={<Cardapio />} />
             <Route path='Sobre' element={<Sobre />} />
           </Route>
+          <Route path='prato/:id' element={<Prato />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />

@@ -1,6 +1,7 @@
 import Banner from 'components/Banner';
 import Footer from 'components/Footer';
 import Menu from 'components/Menu';
+import Adimin from 'pages/Adimin';
 import Cardapio from 'pages/Cardapio';
 import Inicio from 'pages/Inicio';
 import NotFound from 'pages/NotFound';
@@ -18,6 +19,7 @@ export default function AppRoutes() {
             <Route index element={<Inicio />} />
             <Route path='Cardapio' element={<Cardapio />} />
             <Route path='Sobre' element={<Sobre />} />
+            <Route path='adimin/:adimin' element={<Adimin />}/>
           </Route>
           <Route path='prato/:id' element={<Prato />} />
           <Route path='*' element={<NotFound />} />

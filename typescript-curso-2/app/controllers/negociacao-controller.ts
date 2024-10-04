@@ -1,22 +1,26 @@
+import { domInject } from '../decoreitors/dom-inject.js';
 import { logarTempoDeExecucao } from '../decoreitors/logarTempoExecucao.js';
 import { DiasDaSemana } from '../enums/enum-diasDaSemana.js';
+import { negociacaoDoDia } from '../interfaces/interfaceDeDados.js';
 import { Negociacao } from '../models/negociacao.js';
 import { Negociacoes } from '../models/negociacoes.js';
+import { obiterDadosService } from '../services/obterDadosService.js';
 import { MensagemView } from '../views/mensagem-view.js';
 import { NegociacaoView } from '../views/negociacao-view.js';
 
 export class NegociacaoController {
-    private inputData: HTMLInputElement;
-    private inputQuantidade: HTMLInputElement;
-    private inputValor: HTMLInputElement;
+    @domInject('#data')
+    private inputData!: HTMLInputElement;
+    @domInject('#quantidade')
+    private inputQuantidade!: HTMLInputElement;
+    @domInject('#valor')
+    private inputValor!: HTMLInputElement;
     private negociacoes = new Negociacoes();
     private negociacaoView = new NegociacaoView('#negociacaoView');
     private mensagemView = new MensagemView('#mensagemView')
+    private service = new obiterDadosService()
 
     constructor() {
-        this.inputData = document.querySelector('#data') as HTMLInputElement;
-        this.inputQuantidade = document.querySelector('#quantidade')as HTMLInputElement;
-        this.inputValor = <HTMLInputElement> document.querySelector('#valor');
         this.negociacaoView.update(this.negociacoes);
     }
     
@@ -32,6 +36,15 @@ export class NegociacaoController {
         this.limparFormulario();
     }
 
+    importaDado():void{
+
+        this.service.obiterDados()
+            .then(negociacaoDeHoje=>{
+                for(let negociacao of negociacaoDeHoje){
+                    this.negociacoes.adiciona(negociacao)
+                }
+            })
+    }
 
     private limparFormulario(): void {
         this.inputData.value = '';

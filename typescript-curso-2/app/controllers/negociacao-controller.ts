@@ -7,6 +7,7 @@ import { Negociacoes } from '../models/negociacoes.js';
 import { obiterDadosService } from '../services/obterDadosService.js';
 import { MensagemView } from '../views/mensagem-view.js';
 import { NegociacaoView } from '../views/negociacao-view.js';
+import {imprimir} from '../utils/imprimir.js'
 
 export class NegociacaoController {
     @domInject('#data')
@@ -32,13 +33,20 @@ export class NegociacaoController {
             return 
         }
         this.negociacoes.adiciona(negociacao);
+        imprimir(negociacao, this.negociacoes )
         this.atualizarView()
         this.limparFormulario();
+
     }
 
     importaDado():void{
 
         this.service.obiterDados()
+            .then(negociacoesDoDia=>{
+                return negociacoesDoDia.filter(negociacoesDoDia=>{
+                    return !this.negociacoes.lista().some(negosiacao=> negosiacao.ehIgual(negociacoesDoDia) )
+                })
+            })
             .then(negociacaoDeHoje=>{
                 for(let negociacao of negociacaoDeHoje){
                     this.negociacoes.adiciona(negociacao)
@@ -61,4 +69,7 @@ export class NegociacaoController {
     private ehDiaUtil(data: Date): boolean{
         return data.getDay() > DiasDaSemana.DOMINGO && data.getDay() < DiasDaSemana.SABADO
     }
+
+    
+
 }

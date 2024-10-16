@@ -1,0 +1,9 @@
+@mixin margem-central($width){
+    margin: 0 auto;
+    width: $width;
+}
+@mixin texto-formatado($family, $size, $color){
+    font-size: $size;
+    font-family: $family;
+    color: $color;
+}

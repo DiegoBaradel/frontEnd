@@ -1,31 +1,36 @@
-import Banner from 'components/Banner';
 import Footer from 'components/Footer';
 import Menu from 'components/Menu';
 import Adimin from 'pages/Adimin';
-import Cardapio from 'pages/Cardapio';
-import Inicio from 'pages/Inicio';
-import NotFound from 'pages/NotFound';
-import Prato from 'pages/Prato';
-import Sobre from 'pages/Sobre';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 
 export default function AppRoutes() {
+
+  const Cardapio = lazy(() => import('pages/Cardapio'));
+  const Inicio = lazy(() => import('pages/Inicio'));
+  const Banner = lazy(() => import('components/Banner'));
+  const NotFound = lazy(() => import('pages/NotFound'));
+  const Prato = lazy(() => import('pages/Prato'));
+  const Sobre = lazy(() => import('pages/Sobre'));
+
   return (
     <BrowserRouter>
       <main className='container'>
         <Menu />
-        <Routes>
-          <Route path='/' element={<Banner />}>
-            <Route index element={<Inicio />} />
-            <Route path='Cardapio' element={<Cardapio />} />
-            <Route path='Sobre' element={<Sobre />} />
-            <Route path='adimin/:adimin' element={<Adimin />}/>
-          </Route>
-          <Route path='prato/:id' element={<Prato />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<p>Carregando...</p>}>
+          <Routes>
+            <Route path='/' element={<Banner />}>
+              <Route index element={<Inicio />} />
+              <Route path='Cardapio' element={<Cardapio />} />
+              <Route path='Sobre' element={<Sobre />} />
+              <Route path='adimin/:adimin' element={<Adimin />} />
+            </Route>
+            <Route path='prato/:id' element={<Prato />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </Suspense>
         <Footer />
       </main>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }

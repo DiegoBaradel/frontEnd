@@ -1,20 +1,23 @@
 import { Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import styles from './Prato.module.scss';
 import cardapio from 'data/cardapio.json';
-import TagsPrato from 'components/TagsPrato';
-import NotFound from 'pages/NotFound';
-import Banner from 'components/Banner';
+import { lazy } from 'react';
 
 export default function Prato() {
   const { id } = useParams();
   const navegate = useNavigate();
   const prato = cardapio.find(item => item.id === Number(id));
 
+  const TagsPrato = lazy(()=> import('components/TagsPrato'));
+  const NotFound = lazy(()=> import('pages/NotFound'));
+  const Banner = lazy(()=> import('components/Banner'));
+
   if (!prato) {
     return (
       <NotFound />
     );
   }
+
   return (
     <Routes>
       <Route path='*' element={<Banner />}>

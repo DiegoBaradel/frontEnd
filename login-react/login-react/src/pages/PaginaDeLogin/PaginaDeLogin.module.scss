@@ -1,0 +1,34 @@
+.container{
+    &__login {
+        display:  flex;
+        background-color: var(--cinza-escuro);
+        padding: 3.5em 5em;
+        border-radius: 32px;
+        gap: 3em;
+    }
+    &__links{
+        text-align: center;
+        ul{
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 1.5em;
+            margin: .5em 0 1.5em 0;
+        }
+    }
+}
+
+.form__opcoes{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    margin-top: .5em;
+    border: none;
+    a{
+        color: var(--offwhite);
+        font-family: Prompt;
+        text-align: right;
+        font-size: 15px;
+    }
+}

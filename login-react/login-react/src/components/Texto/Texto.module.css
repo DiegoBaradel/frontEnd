@@ -1,0 +1,24 @@
+.container__links__titulo {
+  font-size: 15px;
+  color: var(--offwhite);
+  position: relative;
+}
+.container__links__titulo::before, .container__links__titulo::after {
+  position: absolute;
+  display: inline-block;
+  top: 0.7em;
+  left: 1em;
+  content: " ";
+  width: 2em;
+  height: 0.05em;
+  background-color: var(--offwhite);
+}
+.container__links__titulo::after {
+  left: initial;
+  right: 1em;
+}
+.container__links__texto {
+  font-size: 15px;
+  color: var(--offwhite);
+  margin-bottom: 0.9em;
+}/*# sourceMappingURL=Texto.module.css.map */

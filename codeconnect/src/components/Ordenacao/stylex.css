@@ -1,0 +1,15 @@
+.container-ordenacao{
+    display:  flex;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 56px;
+}
+.container-ordenacao a{
+    text-decoration: none;
+    color: var(--cinza-medio);
+    font-size: 18px;
+}
+.container-ordenacao .container-ordenacao--ativo{
+    color: var(--verde-destaque);
+    text-decoration: underline;
+}

@@ -1,0 +1,42 @@
+.form{
+    &__campo__checkBox{
+        margin-right: .5em;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        border: 2px solid var(--cinza-claro);
+        background-color: none;
+        label{
+            cursor: pointer;
+            position: absolute;
+            left: -1px;
+            top: -2px;
+            &::after{
+                content: '';
+                width: 7px;
+                height: 4px;
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                border: 3px solid var(--verde-destaque);
+                border-top: none;
+                border-right: none;
+                background: transparent;
+                opacity: 0;
+                transform: rotate(-45deg);
+            }
+            &:hover::after{
+                opacity: 0.3;
+            }
+        }
+        input[type = checkbox]{
+            visibility: hidden;
+            &:checked+label::after{
+                opacity: 1;
+            }
+        }
+    }
+    &__opcoes__texto{
+        flex-grow: 2;
+    }
+}

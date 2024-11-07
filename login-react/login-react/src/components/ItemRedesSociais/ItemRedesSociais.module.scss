@@ -1,0 +1,11 @@
+.item{
+    list-style-type: none;
+    a{
+        text-decoration: none;
+        color: var(--offwhite);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 13px;
+    }
+}

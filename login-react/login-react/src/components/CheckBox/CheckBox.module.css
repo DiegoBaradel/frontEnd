@@ -1,0 +1,40 @@
+.form__campo__checkBox {
+  margin-right: 0.5em;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  border: 2px solid var(--cinza-claro);
+  background-color: none;
+}
+.form__campo__checkBox label {
+  cursor: pointer;
+  position: absolute;
+  left: -1px;
+  top: -2px;
+}
+.form__campo__checkBox label::after {
+  content: "";
+  width: 7px;
+  height: 4px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border: 3px solid var(--verde-destaque);
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+.form__campo__checkBox label:hover::after {
+  opacity: 0.3;
+}
+.form__campo__checkBox input[type=checkbox] {
+  visibility: hidden;
+}
+.form__campo__checkBox input[type=checkbox]:checked + label::after {
+  opacity: 1;
+}
+.form__opcoes__texto {
+  flex-grow: 2;
+}/*# sourceMappingURL=CheckBox.module.css.map */

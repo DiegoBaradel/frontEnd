@@ -1,0 +1,32 @@
+.container__login {
+  display: flex;
+  background-color: var(--cinza-escuro);
+  padding: 3.5em 5em;
+  border-radius: 32px;
+  gap: 3em;
+}
+.container__links {
+  text-align: center;
+}
+.container__links ul {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1.5em;
+  margin: 0.5em 0 1.5em 0;
+}
+
+.form__opcoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  margin-top: 0.5em;
+  border: none;
+}
+.form__opcoes a {
+  color: var(--offwhite);
+  font-family: Prompt;
+  text-align: right;
+  font-size: 15px;
+}/*# sourceMappingURL=PaginaDeLogin.module.css.map */

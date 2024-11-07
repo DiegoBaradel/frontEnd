@@ -1,0 +1,29 @@
+.form__campo__digitacao input {
+  margin-top: 0.5em;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  width: 100%;
+  border: none;
+  font-family: var(--fonte);
+  font-size: 18px;
+}
+.form__campo__digitacao input:not(:focus) {
+  background-color: var(--cinza-medio);
+}
+.form__campo__digitacao input:not(:focus)::-moz-placeholder {
+  color: var(--grafite);
+  font-size: 15px;
+}
+.form__campo__digitacao input:not(:focus)::placeholder {
+  color: var(--grafite);
+  font-size: 15px;
+}
+.form__campo__digitacao input:focus {
+  outline: none;
+}
+.form__campo__digitacao label {
+  display: block;
+}
+.form__campo__digitacao label:last-of-type {
+  margin-top: 1em;
+}/*# sourceMappingURL=Input.module.css.map */

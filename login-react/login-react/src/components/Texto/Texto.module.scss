@@ -1,0 +1,27 @@
+.container__links{
+    &__titulo{
+        font-size: 15px;
+        color: var(--offwhite);
+        position: relative;
+        &::before,
+        &::after{
+            position: absolute;
+            display: inline-block;
+            top: 0.7em;
+            left: 1em;
+            content: ' ';
+            width: 2em;
+            height: 0.05em;
+            background-color: var(--offwhite);
+        }
+        &::after{
+            left: initial;
+            right: 1em;
+        }
+    }
+    &__texto{
+        font-size: 15px;
+        color: var(--offwhite);
+        margin-bottom: .9em;
+    }
+}

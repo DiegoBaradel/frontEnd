@@ -1,0 +1,33 @@
+
+input{
+    display: none;
+}
+
+.checkbox-customizado{
+    width: 20px;
+    height: 20px;
+    background-color: var(--neutro);
+    border: 1px solid var(--preto);
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.checked{
+    background-color: var(--preto);
+    position: relative;
+}
+
+.checked::after{
+    content: "";
+    position: absolute;
+    left: 30%;
+    top: -10%;
+    width: 5px;
+    height: 14px;
+
+    border-top: 2px solid var(--neutro);
+    border-left: 2px solid var(--neutro);
+
+    transform: rotate(-140deg);
+}

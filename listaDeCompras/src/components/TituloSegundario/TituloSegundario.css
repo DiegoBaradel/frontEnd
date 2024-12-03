@@ -1,0 +1,13 @@
+h2{
+    font-family: var(--fonte-titulo);
+    color: var(--cor-primaria);
+    font-size: 20px;
+    line-height: 33px;
+}
+
+hr{
+    border: none;
+    border-bottom: 3px dotted var(--cor-primaria);
+    margin-bottom: 24px;
+    width: 100%;
+}

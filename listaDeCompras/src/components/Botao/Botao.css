@@ -1,0 +1,11 @@
+.adicionar-botao{
+    text-align: center;
+    padding: 12px 16px;
+    border-radius: 24px;
+    background-color: var(--cor-primaria);
+    color: var(--neutro);
+    font-family: var(--fonte-texto);
+    font-size: 18px;
+    line-height: 24px;
+    border: none;
+}

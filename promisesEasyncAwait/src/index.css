@@ -1,0 +1,16 @@
+:root {
+  --background-color: #00090e;
+  --text-color: #e1e1e1;
+  --primary-color: #81fe88;
+  --secondary-color: #888888;
+  --tag-color: 3171d1f;
+  --font-family: "prompt", sans-serif;
+  --itens-background: #171d1f;
+}
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+

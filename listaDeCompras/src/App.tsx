@@ -5,6 +5,7 @@ import Input from './components/Input'
 import ItemCompra from './components/ItemCompra'
 import TituloSegundario from './components/TituloSegundario'
 import IProduto from './interface/IProduto'
+import { obterData } from './utils/obterData'
 
 function App() {
 
@@ -13,10 +14,13 @@ function App() {
 
   const adicionarCompra = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    let nomeItem = { nome: item, ckeck: false, data:obterData()}
     if (item === '') {
+      alert('campo em branco!!!')
       return
     }
-    setItens([...itens, { nome: item, ckeck: false }])
+    
+    setItens([...itens, nomeItem])
     setItem('')
   }
 

@@ -1,4 +1,5 @@
 import IProduto from "../../interface/IProduto"
+import { obterData } from "../../utils/obterData"
 import BotaoAction from "../BotaoAction"
 import CheckboxCustomizado from "../CheckboxCustomizado"
 
@@ -12,19 +13,18 @@ interface ItemCompraProps {
 }
 
 const ItemCompra = ({ item, id, setItens, itens }: ItemCompraProps) => {
-    const data = new Date
-    const diaDaSemana = () => {
-        const diaDaSemana = data.toLocaleDateString("pt-Br", { weekday: 'long' })
-        const dataFormatada = data.toLocaleDateString()
-        const hora = data.toLocaleTimeString("pt-BR", { hour: 'numeric', minute: 'numeric' })
-        return `${diaDaSemana} (${dataFormatada}) ás ${hora}`
-    }
 
+    
     const aoDeletar = (item:IProduto) =>{
         setItens(itens.filter(i=>i.nome!==item.nome))
     }
     const aoEditar = (item:IProduto) =>{
-        console.log('editar')
+        
+        const novoItem = prompt('digite um novo item')
+        const listaFiltrada = itens.filter(i=>i.nome !== item.nome)
+        if (novoItem!==null&&novoItem!=='') {
+            setItens([...listaFiltrada,{nome:novoItem, ckeck:item.ckeck, data:obterData()}])
+        }
     }
 
     return (
@@ -43,7 +43,7 @@ const ItemCompra = ({ item, id, setItens, itens }: ItemCompraProps) => {
                     </BotaoAction>
                 </div>
             </div>
-            <p className="item-lista-texto">{diaDaSemana()}</p>
+            <p className="item-lista-texto">{item.data}</p>
         </li>
     )
 }

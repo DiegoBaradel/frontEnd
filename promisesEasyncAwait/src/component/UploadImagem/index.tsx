@@ -1,46 +1,66 @@
 import { useRef, useState } from 'react'
 import './UploadImagem.css'
 import { lerConteudoDoArquivo } from '../../utils/lerConteudoDoArquivo'
+import { publicarProjeto } from '../../utils/publicarProjeto'
+import IProjeto from '../../interface/IProjeto'
+import listaDeTagsValida from '../../../db.json'
+
 
 const UploadImagem = () => {
-
-    const listaDeTagsValida = ['front-end', 'programaçao', 'data science', 'html', 'css', 'javascript', 'react',]
 
     const inputUpload = useRef<HTMLInputElement>(null)
 
     const [carregarImagem, setCarregarImagem] = useState<string>('./img/imagem1.png')
     const [nomeImagem, setNomeImagem] = useState<string>('image_projeto.png')
     const [listaTags, setListaTags] = useState<string[]>([])
-    const [tag, setTag] = useState<string>('')
 
-    const upload = () =>{
+    const [tag, setTag] = useState<string>('')
+    const [nomeProjeto, setNomeProjeto] = useState<string>('')
+    const [descricaoProjeto, setDescricaoProjeto] = useState<string>('')
+
+    
+    const lisparFormulario = () => {
+        setCarregarImagem('./img/imagem1.png')
+        setNomeImagem('image_projeto.png')
+        setListaTags([])
+        setTag('')
+        setNomeProjeto('')
+        setDescricaoProjeto('')
+    }
+    const upload = () => {
         inputUpload.current?.click()
     }
-    const aoSalvarFormulario = (evt: React.FormEvent<HTMLFormElement>)=>{
+    const aoSalvarFormulario = async (evt: React.FormEvent<HTMLFormElement>, projeto:IProjeto) => {
         evt.preventDefault()
+        await publicarProjeto(projeto)
+        lisparFormulario()
+        
     }
-    const aoClicarEnter = async (evt:React.KeyboardEvent<HTMLInputElement>)=>{
-        if (evt.key === "Enter" && tag.trim() !== '') {
-            try {
-                
-                const validarTag =  verificarTagDisponiveis(tag.toLowerCase())
-                if (await validarTag) {
-                    setListaTags([...listaTags, tag])
-                }else{
-                    alert(`tag ${tag} não encontrada !!!`)
-                }
+    
 
+    const aoClicarEnter = async (evt: React.KeyboardEvent<HTMLInputElement>) => {
+        
+        if (evt.key === "Enter" && tag.trim() !== '') {
+            evt.preventDefault()
+            try {
+
+                const validarTag = verificarTagDisponiveis(tag.toLowerCase())
+                if (await validarTag && !listaTags.includes(tag)) {
+                    setListaTags([...listaTags, tag])
+                } else {
+                    alert(`tag ${tag} não encontrada, ou já existe !!!`)
+                }
             } catch (error) {
-              console.error('Erro ao verificar a existencia da tag')  
+                console.error('Erro ao verificar a existencia da tag')
             }
         }
-        setTag('')
+
     }
-    const excluirTag = (key: string)=>{
-        setListaTags(listaTags.filter(tag=> tag !== key))
+    const excluirTag = (key: string) => {
+        setListaTags(listaTags.filter(tag => tag !== key))
     }
 
-    const aoCarregar = async (evento: React.ChangeEvent<HTMLInputElement>) =>{
+    const aoCarregar = async (evento: React.ChangeEvent<HTMLInputElement>) => {
         const arquivo = evento.target.files
         if (arquivo) {
             try {
@@ -50,19 +70,19 @@ const UploadImagem = () => {
                     setCarregarImagem(conteudoDoArquivo.url?.toString())
                 }
             }
-            catch(erro){
+            catch (erro) {
                 console.error("Erro de leitura do arquivo")
             }
         }
     }
 
-    const verificarTagDisponiveis = async (texto: string) =>{
-        return new Promise<boolean>((resolve)=>{
+    const verificarTagDisponiveis = async (texto: string) => {
+        return new Promise<boolean>((resolve) => {
             setTimeout(() => {
-                resolve(listaDeTagsValida.includes(texto))
+                resolve(listaDeTagsValida.tags.includes(texto))
             }, 1000);
         })
-    } 
+    }
 
     return (
         <main>
@@ -79,32 +99,32 @@ const UploadImagem = () => {
             </div>
             <div className="container-descricao">
                 <h2>Novo projeto</h2>
-                <form onSubmit={aoSalvarFormulario}>
+                <form onReset={lisparFormulario} onSubmit={(evt)=>aoSalvarFormulario(evt,{nome: nomeProjeto, decricao: descricaoProjeto, tags: listaTags})}>
                     <div>
                         <label htmlFor="nome">Nome do Projeto</label>
-                        <input type="text" name="nome" id="nome"/>
+                        <input onChange={evt =>setNomeProjeto(evt.target.value)} value={nomeProjeto} type="text" name="nome" id="nome" required />
                     </div>
                     <div>
                         <label htmlFor="descricao">Descrição</label>
-                        <textarea name="descricao" id="descricao" />
+                        <textarea required onClick={evt=>evt.preventDefault()} onChange={evt => setDescricaoProjeto(evt.target.value)} value={descricaoProjeto} name="descricao" id="descricao" />
                     </div>
                     <div>
                         <label htmlFor="categoria">Tags</label>
-                        <input onKeyDown={aoClicarEnter} onChange={(evt)=>setTag(evt.target.value)} value={tag} type="text" name="categoria" id="categoria" />
+                        <input onChange={evt => setTag(evt.target.value)} value={tag} onKeyDown={aoClicarEnter} type="text" name="categoria" id="categoria" required />
                     </div>
                     <ul className="lista-tags">
                         {
-                            listaTags.map((tag)=>
-                            <li key={tag}>
-                                <p>{tag}</p>
-                                <img onClick={()=>excluirTag(tag)} src="./img/close-black.svg" />
-                            </li>)
+                            listaTags.map((tag) =>
+                                <li key={tag}>
+                                    <p>{tag}</p>
+                                    <img onClick={() => excluirTag(tag)} src="./img/close-black.svg" />
+                                </li>)
                         }
-                        
+
                     </ul>
                     <div className="container-botoes">
-                        <button className="botao-descartar">Descartar</button>
-                        <button className="botao-publicar">Publicar</button>
+                        <button type='reset' className="botao-descartar">Descartar</button>
+                        <button type='submit' className="botao-publicar">Publicar</button>
                     </div>
                 </form>
             </div>

@@ -275,6 +275,13 @@ h2, h3 {
   width: 20px;
   height: 20px;
 }
+.lista-vazia{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
 
 span {
   width: 180px;

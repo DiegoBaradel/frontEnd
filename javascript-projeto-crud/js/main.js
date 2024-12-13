@@ -15,9 +15,14 @@ async function aoSubmeterFormulario(evt) {
     evt.preventDefault()
     const conteudo = document.querySelector('#pensamento-conteudo').value
     const autoria = document.querySelector('#pensamento-autoria').value
+    const id = document.querySelector('#pensamento-id').value
 
     try {
-        await api.salvarPensamento({conteudo, autoria})
+        if (id) {
+            await api.editarPensamento({conteudo, autoria, id})
+        }else{
+            await api.salvarPensamento({conteudo, autoria})
+        }
         ui.renderizarPensamentos()
     } catch (error) {
         alert('Erro ao salvar pensamento')

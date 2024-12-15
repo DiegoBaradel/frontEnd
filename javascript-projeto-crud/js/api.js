@@ -47,6 +47,31 @@ const api = {
         } catch (error) {
             alert('Erro ao deletar pensamento')
         }
+    },
+
+    async filtrarPensamentos(busca){
+        try {
+            const pensamentos = await this.buscarPensamentos()
+
+            const pensamentosFiltrados = pensamentos.filter(pensamento => {
+                return (pensamento.conteudo.toLowerCase().includes(busca.toLowerCase()) || pensamento.autoria.toLowerCase().includes(busca.toLowerCase()) )
+            })
+            return pensamentosFiltrados
+        } catch (error) {
+            alert('Erro ao filtrar pensamentos')
+            throw error
+        }
+    },
+
+    async atualizarFavorito(id, favorito){
+        try {
+            const response = await axios.patch(`${URL_BASE}/pensamentos/${id}`, {favorito})
+            return response.data
+            
+        } catch (error) {
+            alert('Erro ao atualizar o favorito')
+            throw error
+        }
     }
 }
 

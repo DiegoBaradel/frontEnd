@@ -6,9 +6,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     const formularioPensamentos = document.querySelector('#pensamento-form')
     const btnCancelar = document.querySelector('#botao-cancelar')
-    
+    const inputBusca = document.querySelector('#campo-busca')
+
     formularioPensamentos.addEventListener('submit', aoSubmeterFormulario)
     btnCancelar.addEventListener('click', aoCancelar)
+    inputBusca.addEventListener('input', aoBuscar)
 })
 
 async function aoSubmeterFormulario(evt) {
@@ -31,4 +33,15 @@ async function aoSubmeterFormulario(evt) {
 
 function aoCancelar(){
     ui.liparCompos()
+}
+
+async function aoBuscar() {
+    const busca = document.querySelector('#campo-busca').value
+
+    try {
+        const buscaFiltrada = await api.filtrarPensamentos(busca)
+        ui.renderizarPensamentos(buscaFiltrada)
+    } catch (error) {
+        alert('Erro ao filtrar pensamentos')
+    }
 }

@@ -26,11 +26,19 @@ const ui = {
         document.querySelector('#pensamento-autoria').value = pensamento.autoria
     },
 
-    async renderizarPensamentos(){
+    async renderizarPensamentos(pensamentosFiltrados = null){
         const listaPensamentos = document.querySelector('#lista-pensamentos')
+
         listaPensamentos.innerHTML = ''
         try {
-            const pensamentos = await api.buscarPensamentos()
+            let pensamentos
+
+            if (pensamentosFiltrados) {
+                pensamentos = pensamentosFiltrados
+            } else {
+                pensamentos = await api.buscarPensamentos()
+            }
+            
             if (pensamentos.length === 0) {
                 ui.renderizerSemPensamentos()
             } else {
@@ -75,6 +83,17 @@ const ui = {
             }
         }
 
+        const botaoFavorito = document.createElement('button')
+        botaoFavorito.classList.add('botao-favorito')
+        botaoFavorito.onclick = async ()=>{
+            try {
+                await api.atualizarFavorito(pensamento.id, !pensamento.favorito)
+                ui.renderizarPensamentos()
+            } catch (error) {
+                alert('Erro ao atualizar favorito')
+            }
+        }
+
         const iconeEditar = document.createElement('img')
         iconeEditar.src = 'assets/imagens/icone-editar.png'
         iconeEditar.alt = 'Editar'
@@ -85,8 +104,14 @@ const ui = {
         iconeExcluir.alt = 'Excluir'
         botaoExcliuir.appendChild(iconeExcluir)
 
+        const iconeFavorito = document.createElement('img')
+        iconeFavorito.src = pensamento.favorito ? 'assets/imagens/icone-favorito.png' : 'assets/imagens/icone-favorito_outline.png'
+        iconeFavorito.alt = 'Favorito'
+        botaoFavorito.appendChild(iconeFavorito)
+
         const icones = document.createElement('div')
         icones.classList.add('icones')
+        icones.appendChild(botaoFavorito)
         icones.appendChild(botaoEditar)
         icones.appendChild(botaoExcliuir)
 
@@ -100,6 +125,10 @@ const ui = {
 
     liparCompos(){
         document.getElementById("pensamento-form").reset();
+    },
+
+    aoBuscarPensamento(busca){
+        
     }
 
 }

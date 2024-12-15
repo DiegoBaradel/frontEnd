@@ -1,9 +1,28 @@
 {
   "pensamentos": [
     {
-      "conteudo": " asdsdasdasddas",
-      "autoria": "asdasdasdasd",
-      "id": "82c4"
+      "id": "e242",
+      "favorito": false,
+      "conteudo": "Torna-te aquilo que és",
+      "autoria": "Friedrich Nietzsche"
+    },
+    {
+      "id": "4699",
+      "favorito": false,
+      "conteudo": "Sem a música, a vida seria um erro.",
+      "autoria": "Friedrich Nietzsche"
+    },
+    {
+      "id": "1531",
+      "favorito": false,
+      "conteudo": "Tudo vale a pena quando a alma não é pequena.",
+      "autoria": "Fernando Pessoa"
+    },
+    {
+      "id": "e815",
+      "favorito": false,
+      "conteudo": "Lutar pelo amor é bom, mas alcançá-lo sem luta é melhor.",
+      "autoria": "William Shakespeare"
     }
   ]
 }

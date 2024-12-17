@@ -72,8 +72,9 @@ const ui = {
 
         const divData = document.createElement('div')
         const dataFormatada = pensamento.data.toLocaleDateString('pt-BR')
+        const dataComRegex = dataFormatada.replace(/^(\w)/, (match)=> match.toUpperCase())
         divData.classList.add('pensamento-data')
-        divData.textContent = dataFormatada
+        divData.textContent = dataComRegex
 
         const botaoEditar = document.createElement('button')
         botaoEditar.classList.add('botao-editar')

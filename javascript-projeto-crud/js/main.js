@@ -1,8 +1,35 @@
 import api from './api.js'
 import ui from './ui.js'
 
+const regexConteudo = /^[A-Za-z\s]{10,}$/
+const regexAutoria = /^[A-Za-z]{3,15}$/
+
+const pensamentosSet = new Set()
+
+async function adicionerChaveAoPensamento(){
+    try {
+        const pensamentos = await api.buscarPensamentos()
+        pensamentos.forEach(pensamento => {
+            const chavePensmento = `${pensamento.conteudo.trim().toLowerCase()}-${pensamento.autoria.trim().toLowerCase()}`
+            pensamentosSet.add(chavePensmento)
+        })
+    } catch (error) {
+        alert('Erro ao adicionar chave do pensamento')
+        throw error
+    }
+}
+
+function validarInput(regra, conteudo){
+    return regra.test(conteudo)
+}
+
+function removerEspacos(string) {
+    return string.replaceAll(/\s+/g, '')
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
     ui.renderizarPensamentos()
+    adicionerChaveAoPensamento()
 
     const formularioPensamentos = document.querySelector('#pensamento-form')
     const btnCancelar = document.querySelector('#botao-cancelar')
@@ -20,9 +47,24 @@ async function aoSubmeterFormulario(evt) {
     const id = document.querySelector('#pensamento-id').value
     const data = document.querySelector('#pensamento-data').value
 
+    const conteudoSemEspaco = removerEspacos(conteudo)
+    const chaveNovoPensamento = `${conteudo.trim().toLowerCase()}-${autoria.trim().toLowerCase()}`
+
+    if (!validarInput(regexConteudo, conteudoSemEspaco)||!validarInput(regexAutoria, autoria)) {
+        alert('campo invalido')
+        return
+    }
+
     if (validarData(data)) {
         alert('Data invalida')
         return
+    }
+
+    if (pensamentosSet.has(chaveNovoPensamento)) {
+        alert('O pensamento já existe')
+        return
+    }else{
+        pensamentosSet.add(chaveNovoPensamento)
     }
 
     try {

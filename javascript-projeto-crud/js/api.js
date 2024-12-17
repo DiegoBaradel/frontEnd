@@ -1,10 +1,21 @@
 const URL_BASE = 'http://localhost:3000'
 
+const converterDataParaUTC = (data) =>{
+    const [ano, mes, dia] = data.split('-')
+    return new Date(Date.UTC(ano, mes-1, dia))
+}
+
 const api = {
     async buscarPensamentos(){
         try {
             const response = await axios.get(`${URL_BASE}/pensamentos`)
-            return await response.data
+            const pensamentos = await response.data
+
+            return pensamentos.map(pensamento=>{
+                return {
+                    ...pensamento, data: new Date(pensamento.data)
+                }
+            })
         } catch (error) {
             alert('Erro ao buscar pensamentos')
             throw error
@@ -13,7 +24,8 @@ const api = {
 
     async salvarPensamento(pentamento){
         try {
-            const response = await axios.post(`${URL_BASE}/pensamentos`, pentamento)
+            const data = converterDataParaUTC(pentamento.data)
+            const response = await axios.post(`${URL_BASE}/pensamentos`, {...pentamento, data: data.toISOString()})
             return await response.data
         } catch (error) {
             alert('Erro ao salvar pensamento')
@@ -24,7 +36,8 @@ const api = {
     async buscarPensamentoPorId(id){
         try {
             const response = await axios.get(`${URL_BASE}/pensamentos/${id}`)
-            return await response.data
+            const pensamento = await response.data
+            return {...pensamento, data: new Date(pensamento.data)}
         } catch (error) {
             alert('Erro ao buscar pensamento')
             throw error
@@ -33,7 +46,8 @@ const api = {
 
     async editarPensamento(pentamento){
         try {
-            const response = await axios.put(`${URL_BASE}/pensamentos/${pentamento.id}`, pentamento)
+            const data = converterDataParaUTC(pentamento.data)
+            const response = await axios.put(`${URL_BASE}/pensamentos/${pentamento.id}`, {...pentamento, data: data.toISOString()})
             return await response.data
         } catch (error) {
             alert('Erro ao alterar pensamento')

@@ -24,6 +24,8 @@ const ui = {
         document.querySelector('#pensamento-id').value = pensamento.id
         document.querySelector('#pensamento-conteudo').value = pensamento.conteudo
         document.querySelector('#pensamento-autoria').value = pensamento.autoria
+        document.querySelector('#pensamento-data').value = pensamento.data.toISOString().split('T')[0]
+        document.querySelector('#form-container').scrollIntoView()
     },
 
     async renderizarPensamentos(pensamentosFiltrados = null){
@@ -67,6 +69,11 @@ const ui = {
         const divAutor = document.createElement('div')
         divAutor.classList.add('pensamento-autor')
         divAutor.textContent = pensamento.autoria
+
+        const divData = document.createElement('div')
+        const dataFormatada = pensamento.data.toLocaleDateString('pt-BR')
+        divData.classList.add('pensamento-data')
+        divData.textContent = dataFormatada
 
         const botaoEditar = document.createElement('button')
         botaoEditar.classList.add('botao-editar')
@@ -118,18 +125,15 @@ const ui = {
         li.appendChild(iconeAspas)
         li.appendChild(divConteudo)
         li.appendChild(divAutor)
+        li.appendChild(divData)
         li.appendChild(icones)
 
         listaPensamentos.appendChild(li)
     },
 
-    liparCompos(){
+    liparCampos(){
         document.getElementById("pensamento-form").reset();
     },
-
-    aoBuscarPensamento(busca){
-        
-    }
 
 }
 

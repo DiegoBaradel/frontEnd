@@ -4,25 +4,29 @@
       "id": "e242",
       "favorito": false,
       "conteudo": "Torna-te aquilo que és",
-      "autoria": "Friedrich Nietzsche"
+      "autoria": "Friedrich Nietzsche",
+      "data": "2024-08-04T00:00:00.000Z"
     },
     {
       "id": "4699",
       "favorito": false,
       "conteudo": "Sem a música, a vida seria um erro.",
-      "autoria": "Friedrich Nietzsche"
+      "autoria": "Friedrich Nietzsche",
+      "data": "2024-08-03T00:00:00.000Z"
     },
     {
       "id": "1531",
       "favorito": false,
       "conteudo": "Tudo vale a pena quando a alma não é pequena.",
-      "autoria": "Fernando Pessoa"
+      "autoria": "Fernando Pessoa",
+      "data": "2024-08-01T00:00:00.000Z"
     },
     {
       "id": "e815",
       "favorito": false,
       "conteudo": "Lutar pelo amor é bom, mas alcançá-lo sem luta é melhor.",
-      "autoria": "William Shakespeare"
+      "autoria": "William Shakespeare",
+      "data": "2024-08-02T00:00:00.000Z"
     }
   ]
 }

@@ -18,12 +18,18 @@ async function aoSubmeterFormulario(evt) {
     const conteudo = document.querySelector('#pensamento-conteudo').value
     const autoria = document.querySelector('#pensamento-autoria').value
     const id = document.querySelector('#pensamento-id').value
+    const data = document.querySelector('#pensamento-data').value
+
+    if (validarData(data)) {
+        alert('Data invalida')
+        return
+    }
 
     try {
         if (id) {
-            await api.editarPensamento({conteudo, autoria, id})
+            await api.editarPensamento({conteudo, autoria, id, data})
         }else{
-            await api.salvarPensamento({conteudo, autoria})
+            await api.salvarPensamento({conteudo, autoria, data})
         }
         ui.renderizarPensamentos()
     } catch (error) {
@@ -32,7 +38,7 @@ async function aoSubmeterFormulario(evt) {
 }
 
 function aoCancelar(){
-    ui.liparCompos()
+    ui.liparCampos()
 }
 
 async function aoBuscar() {
@@ -44,4 +50,10 @@ async function aoBuscar() {
     } catch (error) {
         alert('Erro ao filtrar pensamentos')
     }
+}
+
+function validarData(data) {
+    const dataAtual = new Date()
+    const dataFormulario = new Date(data)
+    return dataAtual < dataFormulario
 }

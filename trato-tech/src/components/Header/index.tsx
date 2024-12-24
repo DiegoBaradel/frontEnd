@@ -1,25 +1,32 @@
 import styles from './Header.module.scss'
+import TituloComImagem from './tituloComImagem'
+import TituloSemImagem from './tituloSemImagem'
 
 interface HeaderProps{
     titulo: string
     descricao: string
-    className: string
-    imagem: string
+    className?: string
+    imagem?: string
 }
 
 const Header = ({titulo, descricao, className='', imagem}:HeaderProps) => {
     return(
-        <header className={`${styles.header} ${className}`}>
-            <div className={styles['header-texto']}>
-                <h1>{titulo}</h1>
-                <h2>{descricao}</h2>
-            </div>
-            <div className={styles['header-imagem']}>
-                <img 
-                    src={imagem} 
-                    alt={titulo} 
+        <header className={styles.header}>
+            {titulo && !imagem && 
+                <TituloSemImagem 
+                    titulo={titulo}
+                    descricao={descricao}
                 />
-            </div>
+            }
+            {titulo && imagem && 
+                <TituloComImagem 
+                    className={className}
+                    titulo={titulo}
+                    descricao={descricao}
+                    imagem={imagem}
+                />
+            }
+            
         </header>
     )
 }

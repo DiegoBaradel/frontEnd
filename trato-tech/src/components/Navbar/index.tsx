@@ -3,6 +3,7 @@ import Logo  from '../../assets/logo.svg'
 import classNames from 'classnames'
 import { RiShoppingCart2Line, RiShoppingCartFill } from 'react-icons/ri'
 import Busca from '../Busca'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const iconeProps = {
     color: 'white',
@@ -10,24 +11,28 @@ const iconeProps = {
 } 
 
 const Navbar = () =>{
+
+    const navigate = useNavigate()
+    const location = useLocation()
+
     return(
         <nav className={styles.nav}>
-            <img src={Logo} className={styles.logo} />
+            <img src={Logo} className={styles.logo} onClick={()=> navigate('/')} />
             <div className={styles.links}>
                 <div>
-                    <a href="/" className={classNames(styles.link, {[styles.selected]: window.location.pathname === '/'})}>Página inicial</a>
+                    <Link to="/" className={classNames(styles.link, {[styles.selected]: location.pathname === '/'})}>Página inicial</Link>
                 </div>
             </div>
             <div className={styles.busca}>
                 <Busca />
             </div>
             <div className={styles.icones}>
-                <a href="/carrinho">
-                    {window.location.pathname === '/carrinho'?
+                <Link to="/carrinho">
+                    {location.pathname === '/carrinho'?
                         <RiShoppingCartFill {...iconeProps} /> :
                         <RiShoppingCart2Line {...iconeProps} />
                     }
-                </a>
+                </Link>
             </div>
         </nav>
     )

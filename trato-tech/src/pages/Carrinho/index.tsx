@@ -10,6 +10,14 @@ const Carrinho = () => {
         const itemNoCarrinho = state.carrinho
         return itemNoCarrinho
     })
+    const total = useSelector((state:RootState)=>{
+        let subTotal = 0
+        state.itens.map(item=>{
+            console.log(item.quantidade)
+            subTotal += item.quantidade * item.preco
+        })
+        return subTotal
+    })
 
     return (
         <div>
@@ -23,7 +31,7 @@ const Carrinho = () => {
             <div className={style.total}>
                 <strong>Resumo da compra</strong>
                 <span>
-                    Subtotal: <strong>R$ {0.0.toFixed(2)}</strong>
+                    Subtotal: <strong>R$ {total.toFixed(2)}</strong>
                 </span>
 
             </div>

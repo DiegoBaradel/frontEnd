@@ -6,6 +6,7 @@ interface Iitem{
     preco: number
     id: string
     categoria: string
+    quantidade: number
     carrinho?: boolean
 }
 

@@ -1,53 +1,46 @@
+const listaDeItens = []
+
+import {criarItemLista} from './scripts/criarItemLista.js'
+import { criarHoraDoItem } from "./scripts/criarHoraDoItem.js"
+import verificarListaVazia from './scripts/verificarListaVazia.js'
+
 const item = document.querySelector('#input-item')
 const lista = document.querySelector('#lista-de-compras')
 const btnAdicionarItem = document.querySelector('#adicionar-item')
 
-let contador = 1
-
 btnAdicionarItem.addEventListener('click', (evt)=>{
     evt.preventDefault()
-    
-    if (item.value === '') {
-        alert('item invalido ou já existe')
-        return
+
+    const itemDuplicado = listaDeItens.some(elemento => elemento.valor.toUpperCase() === item.value.toUpperCase())
+
+    if (itemDuplicado) {
+        alert('O item já existe na lista')   
+    } else {
+        listaDeItens.push({valor:item.value ,checked: false, data:criarHoraDoItem()})
     }
 
-    const itemDaLista = document.createElement('li')
-    const container = document.createElement('div')
-    container.classList.add('lista-item-container')
-    const checkbox = document.createElement('input')
-    checkbox.type = 'checkbox'
-    checkbox.id = `checkbox-${contador++}`
-    const nomeProduto = document.createElement('p')
-    nomeProduto.innerHTML = item.value
-    const dataFormatada = document.createElement('p')
-    dataFormatada.classList.add('texto-data')
-    dataFormatada.innerHTML = criarHoraDoItem()
+    
+    //const itemDaLista = criarItemLista()
 
+    //lista.appendChild(itemDaLista)
 
-    checkbox.addEventListener('click', ()=>{
+    mostrarItens()
 
-        if (checkbox.checked) {
-            nomeProduto.style.textDecoration = 'line-through'
-        } else {
-            nomeProduto.style.textDecoration = 'none'
-        }
-
-    })
-
-    container.appendChild(checkbox)
-    container.appendChild(nomeProduto)
-    itemDaLista.appendChild(container)
-    itemDaLista.appendChild(dataFormatada)
-    lista.appendChild(itemDaLista)
-
-    item.value = ''
+    verificarListaVazia(lista)
 })
 
-const criarHoraDoItem = ()=>{
-    const diaDaSemana = new Date().toLocaleDateString('pt-BR',{weekday: "long"})
-    const data = new Date().toLocaleDateString('pt-BR')
-    const hora = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit', minute:'2-digit'})
-    const dataCompleta = `${diaDaSemana} (${data}) às ${hora}`
-    return dataCompleta
+verificarListaVazia(lista)
+
+const mostrarItens = ()=>{
+    lista.innerHTML = ''
+    listaDeItens.forEach((item, index) =>{
+        lista.innerHTML += `<li>
+                                <div class="lista-item-container">
+                                    <input type="checkbox" id="checkbox-${index}">
+                                    <p>${item.valor}</p>
+                                </div>
+                                <p class="texto-data">${item.data}</p>
+                            </li>`
+    }
+    )
 }
